@@ -31,7 +31,7 @@ UserSchema.virtual('confirmPassword')
     .set(value => this._confirmPassword = value);
 
 // make use of some Middleware to add in another validation    
-UserSchema.pre('validate', function (next) {
+UserSchema.pre('validate', function(next) {
     if (this.password !== this.confirmPassword) {
         this.invalidate('confirmPassword', 'Password must match confirm password');
     }

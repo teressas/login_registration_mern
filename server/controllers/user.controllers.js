@@ -1,5 +1,5 @@
 const User = require("../models/user.model")
-
+const { authenticate } = require('../config/jwt.config');
 
 register: (req, res) => {
     User.create(req.body)
@@ -16,9 +16,6 @@ register: (req, res) => {
         })
         .catch(err => res.json(err));
 }
-
-
-
 
 login: async (req, res) => {
     const user = await User.findOne({ email: req.body.email });
@@ -53,4 +50,24 @@ login: async (req, res) => {
 logout: (req, res) => {
     res.clearCookie('usertoken');
     res.sendStatus(200);
+}
+
+const payload = {
+    id: user._id
+};
+
+// notice that we're using the SECRET_KEY from our .env file
+const userToken = jwt.sign(payload, process.env.SECRET_KEY);
+
+// send and read cookies with each request/response
+res.cookie("mycookie", "mydata", { httpOnly: true }).json({
+    message: "This response has a cookie"
+});
+
+
+module.exports = app => {
+    app.post("/api/register", Users.register);
+    app.post("/api/login", Users.login);
+    // this route now has to be authenticated
+    app.get("/api/users", authenticate, Users.getAll);
 }
