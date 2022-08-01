@@ -1,28 +1,31 @@
-// near the top is a good place to group our imports
+const mongoose = require("mongoose");
 const bcrypt = require('bcrypt');
 
 const UserSchema = new mongoose.Schema({
     firstName: {
         type: String,
-        required: [true, "First name is required"]
+        required: [true, "First name is required"],
+        minlength: [1, "Password must be 1 characters or longer"]
     },
     lastName: {
         type: String,
-        required: [true, "Last name is required"]
+        required: [true, "Last name is required"],
+        minlength: [1, "Password must be 1 character or longer"]
     },
     email: {
         type: String,
+        validate: {
+            validator: val => /^([\w-\.]+@([\w-]+\.)+[\w-]+)?$/.test(val),
+            message: "Please enter a valid email"
+        }, // custom validator
         required: [true, "Email is required"]
     },
     password: {
         type: String,
         required: [true, "Password is required"],
         minlength: [8, "Password must be 8 characters or longer"]
-    },
-    validate: {
-        validator: val => /^([\w-\.]+@([\w-]+\.)+[\w-]+)?$/.test(val),
-        message: "Please enter a valid email"
-    } // custom validator
+    }
+    
 }, { timestamps: true });
 
 // make use of mongoose virtuals to add fields we don't want to save in MongoDB
@@ -46,3 +49,6 @@ UserSchema.pre('save', function (next) {
             next();
         });
 });
+
+const User = mongoose.model("User", UserSchema);
+module.exports = User;

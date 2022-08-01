@@ -107,3 +107,6 @@ To redirect
     history.push("REDIRECT URL")
     * send a user back one step with history.goBack() 
     * or forward with history.goForward().
+
+21. setup .gitignore
+    - go to terminal, touch .gitignore

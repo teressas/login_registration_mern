@@ -1,24 +1,24 @@
 // Import Dependencies
-const express = require("express");
-const cors = require('cors');
-const jwt = require("jsonwebtoken");
+var express = require("express");
+var cors = require('cors');
+const bcrypt = require('bcrypt');
+require('dotenv').config();
 const cookieParser = require('cookie-parser');
 
-const app = express();
+var app = express();
 const port = 8000;
 
 // This will fire our mongoose.connect statement to initialize our database connection
-require("./config/jwt.config");
+require("./config/mongoose.config");
 
-// pulls environment vars
-require('dotenv').config();
-const myFirstSecret = process.env.FIRST_SECRET_KEY;
+// var fs = require('fs');
+var User = require("./models/user.model.js");
 
+// app has the abilities to send and read cookies with each request/response.
 app.use(cookieParser());
 
-// use cors
+// have cors request the use of credentials
 app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
-
 
 // Configure Express
 app.use(express.json(), express.urlencoded({ extended: true }));
@@ -28,53 +28,7 @@ app.use(express.json(), express.urlencoded({ extended: true }));
 // SERVER RUNS ALL ROUTES BEFORE CALLING ROUTES
 console.log("server.js: before routes")
 // ADD THIS BEFORE ADDING ROUTES!!!
-// require("./routes/product.routes")(app);
+require("./routes/user.routes")(app);
 
 
 app.listen(port, () => console.log(`Listening on port: ${port}`));
-
-// var express = require("express");
-// var app = express();
-// const bcrypt = require('bcrypt');
-// var jwt = require('jsonwebtoken');
-// var cors = require('cors');
-// var mongoose = require("mongoose");
-// mongoose.connect("mongodb://localhost/productDB");
-// var fs = require('fs');
-// var user = require("./model/user.js");
-
-// app.use(cors());
-
-// var express = require("express");
-// var cors = require('cors');
-// var jwt = require('jsonwebtoken');
-// const cookieParser = require('cookie-parser');
-
-// var app = express();
-// const port = 8000;
-
-
-// app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
-
-// // Configure Express
-// app.use(express.json(), express.urlencoded({ extended: true }));
-
-// const payload = {
-//     id: user._id
-// };
-
-// // keep track of who is logged in
-// const userToken = jwt.sign(payload, process.env.SECRET_KEY);
-
-// app.use(cookieParser());
-
-// res.cookie("mycookie", "mydata", { httpOnly: true }).json({
-//     message: "This response has a cookie"
-// });
-
-// console.log("server.js: before routes")
-
-// require("./routes/product.routes")(app);
-
-// app.listen(port, () => console.log(`Listening on port: ${port}`) );
-
