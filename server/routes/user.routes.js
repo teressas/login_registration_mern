@@ -7,5 +7,5 @@ module.exports = app => {
     app.post("/register", UserController.register);
     app.post("/login", UserController.login);
     // this route now has to be authenticated
-    app.get("/users", authenticate, UserController.allUsers);
+    app.get("/dashboard", authenticate, UserController.allUsers);
 }
