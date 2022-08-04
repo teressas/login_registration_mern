@@ -2,11 +2,12 @@
 var express = require("express");
 var cors = require('cors');
 const bcrypt = require('bcrypt');
-require('dotenv').config();
+const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
 
 var app = express();
-const port = 8000;
+dotenv.config();
+const port = process.env.PORT || 8000;
 
 // This will fire our mongoose.connect statement to initialize our database connection
 require("./config/mongoose.config");
@@ -31,4 +32,15 @@ console.log("server.js: before routes")
 require("./routes/user.routes")(app);
 
 
-app.listen(port, () => console.log(`Listening on port: ${port}`));
+const server = app.listen(port, () => console.log(`Listening on port: ${port}`));
+
+const io = require('socket.io')(server, {
+    pingTimeout: 6000, // wait 60 secs to see if user sends msg until it closes the connection to save bandwidth
+    cors: {
+        origin: "http://localhost:3000"
+    },
+});
+
+io.on("connection", (socket) => {
+    console.log("connected to socket.io");
+});

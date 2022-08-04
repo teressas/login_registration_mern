@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 const Dashboard = () => {
     const navigate = useNavigate();
 
+    const [token, setToken] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const logOut = () => {
         navigate("/");

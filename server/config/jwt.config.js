@@ -13,5 +13,7 @@ module.exports.authenticate = (req, res, next) => {
     });
 }
 
-
+/*
+The claims in a JWT are encoded as a JSON object that is digitally signed using JSON Web Signature and/or encrypted using JSON Web Encryption.
+*/
 

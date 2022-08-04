@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Login from '../components/authentication/Login';
+import Register from '../components/authentication/SignUp';
 
-import Register from '../components/Register';
-import Login from '../components/Login';
+
 // import Dashboard from './components/Dashboard';
 
 const Main = () => {
     const [message, setMessage] = useState("Loading...")
     const [users, setUsers] = useState([])
     const [loaded, setLoaded] = useState(false);
+    
 
     // useEffect(() => {
     //     axios.get('http://localhost:8000/users')
