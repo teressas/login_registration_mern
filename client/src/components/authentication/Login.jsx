@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
 import { Button, FormControl, FormLabel, Input, InputGroup, InputRightElement, useToast, VStack } from '@chakra-ui/react';
+import { loginContext, LoginContextProvider } from '../LoginContext';
 
-const Login = (props) => {
+const Login = () => {
 
-    const { users, setUsers } = props
+    const { users, setUsers } = useContext(loginContext);
+    console.log("outside of axios",users)
 
     const [formState, setFormState] = useState({
         email: "",
@@ -82,13 +84,15 @@ const Login = (props) => {
         // make a post request to create a new user 
         axios.post('http://localhost:8000/login', { ...formState })
             .then((res) => {
-                console.log(res)
+                // console.log(res)
                 setFormState(...formState)
-                setUsers([...users, res.data.result])
-                console.log(setFormState)
+                setUsers(res.data.result)
+                navigate("/users");
+                console.log(formState)
+                console.log("axios.then",users)
+
             })
             .catch(err => console.log(err))
-        navigate("/users");
     }
 
     // shows or hides password

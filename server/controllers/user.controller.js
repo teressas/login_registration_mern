@@ -32,13 +32,13 @@ module.exports.register = async (req, res) => {
                     const userToken = jwt.sign({
                         id: user._id
                     }, process.env.FIRST_SECRET_KEY);
-                    console.log("userToken",userToken);
+                    // console.log("userToken",userToken);
                     res
                         .cookie("usertoken", userToken, secret, {
                             httpOnly: true
                         })
                         .json({ msg: "success!", user: user });
-                    console.log("res",res)
+                    // console.log("res",res)
                 })
                 // send and read cookies with each request/response
                 // secure attribute used for https
@@ -90,13 +90,11 @@ module.exports.login = async (req, res) => {
                 httpOnly: true
             })
             .json({ msg: "success!" });
-        console.log("reslogin",res)
+        console.log("res",res)
     } catch (err) {
         console.error("loginerr",err.message);
         res.status(500).send('Server error');
     }
-
-
 }
 
 // Retrieve all users

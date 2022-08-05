@@ -1,13 +1,20 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import { loginContext, LoginContextProvider } from './LoginContext';
 
 
 const Dashboard = () => {
     const navigate = useNavigate();
 
-    const [token, setToken] = useState("");
-    const [loading, setLoading] = useState(false);
+    const { users, isLoggedIn } = useContext(loginContext);
+
+    useEffect(() => {
+        console.log("Dashboard", isLoggedIn, users)
+        if (!isLoggedIn) {
+            // navigate('/');
+        }
+    }, []);
 
     const logOut = () => {
         navigate("/");

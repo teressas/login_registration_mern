@@ -3,9 +3,9 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { Button, FormControl, FormLabel, Input, InputGroup, InputRightElement, useToast, VStack } from '@chakra-ui/react';
 
-const Register = (props) => {
+const Register = () => {
 
-    const { users, setUsers } = props
+    // const { users, setUsers } = props
 
     const [formState, setFormState] = useState({
         firstName: "",
@@ -103,12 +103,11 @@ const Register = (props) => {
                 console.log(res)
                 setFormState(...formState)
                 // setUsers([...users, res.data.result])
-                console.log(setFormState)
-                
+                navigate("/");
+                console.log(formState)
             })
             .catch(err => console.log(err))
             
-        navigate("/users");
     }
 
     // shows or hides password

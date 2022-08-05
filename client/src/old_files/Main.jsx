@@ -30,9 +30,9 @@ const Main = () => {
 
     return (
         <div>
-            <Login users={users} />
+            {/* <Login users={users} /> */}
             <hr />
-            <Register users={users} />
+            {/* <Register users={users} /> */}
         </div>
     )
 }
