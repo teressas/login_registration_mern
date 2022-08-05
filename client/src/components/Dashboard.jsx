@@ -10,15 +10,16 @@ const Dashboard = () => {
     const { users, isLoggedIn } = useContext(loginContext);
 
     useEffect(() => {
-        console.log("Dashboard", isLoggedIn, users)
-        if (!isLoggedIn) {
-            // navigate('/');
+        // console.log("Dashboard", isLoggedIn, users)
+        if (isLoggedIn) {
+            navigate('/');
         }
     }, []);
 
     const logOut = () => {
         navigate("/");
     }
+    
 
     return (
         <div>

@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { Button, FormControl, FormLabel, Input, InputGroup, InputRightElement, useToast, VStack } from '@chakra-ui/react';
+import { loginContext } from '../LoginContext';
 
 const Register = () => {
 
-    // const { users, setUsers } = props
+    const { users, setUsers } = useContext(loginContext);
+
 
     const [formState, setFormState] = useState({
         firstName: "",
@@ -100,11 +102,11 @@ const Register = () => {
         // make a post request to create a new user
         axios.post('http://localhost:8000/register', { ...formState })
             .then(res => {
-                console.log(res)
-                setFormState(...formState)
-                // setUsers([...users, res.data.result])
-                navigate("/");
-                console.log(formState)
+                // console.log(res)
+                // setFormState(...formState)
+                setUsers(true)
+                navigate("/users");
+                // console.log(formState)
             })
             .catch(err => console.log(err))
             

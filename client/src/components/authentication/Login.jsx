@@ -7,7 +7,7 @@ import { loginContext, LoginContextProvider } from '../LoginContext';
 const Login = () => {
 
     const { users, setUsers } = useContext(loginContext);
-    console.log("outside of axios",users)
+    // console.log("outside of axios", users)
 
     const [formState, setFormState] = useState({
         email: "",
@@ -68,7 +68,8 @@ const Login = () => {
             clearForm()
             setHasBeenSubmitted(true)
 
-        } else {
+        } 
+        else {
             if (!formState.email || !isValidEmail(formState.email) || !formState.password) {
                 toast({
                     title: "Please Check All The Fields",
@@ -83,14 +84,13 @@ const Login = () => {
 
         // make a post request to create a new user 
         axios.post('http://localhost:8000/login', { ...formState })
-            .then((res) => {
+            .then(res => {
                 // console.log(res)
-                setFormState(...formState)
-                setUsers(res.data.result)
+                // setFormState(...formState)
+                setUsers(true)
                 navigate("/users");
-                console.log(formState)
-                console.log("axios.then",users)
-
+                // console.log("axios.then",users)
+                // console.log(formState)
             })
             .catch(err => console.log(err))
     }

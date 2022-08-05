@@ -15,10 +15,11 @@ const loginContext = React.createContext(
 function LoginContextProvider(props) {
     const [users, setUsers] = useState();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    // console.log("loginContext18",users)
 
     useEffect(() => {
-        console.log("loginContext20",users)
         setIsLoggedIn(users ? true : false);
+        console.log("loginContext22",users)
     }, [users]);
 
     // {props.children} required to render children
