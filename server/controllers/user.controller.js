@@ -80,7 +80,7 @@ module.exports.login = async (req, res) => {
 
         // if we made it this far, the password was correct 
         const userToken = jwt.sign(payload, process.env.FIRST_SECRET_KEY);
-        console.log("userTokenLogin",userToken);
+        // console.log("userTokenLogin",userToken);
         // const userToken = jwt.sign({
         //     id: user._id
         // }, process.env.FIRST_SECRET_KEY);
@@ -90,7 +90,7 @@ module.exports.login = async (req, res) => {
                 httpOnly: true
             })
             .json({ msg: "success!" });
-        console.log("res",res)
+        // console.log("res",res)
     } catch (err) {
         console.error("loginerr",err.message);
         res.status(500).send('Server error');
@@ -102,7 +102,7 @@ module.exports.allUsers = (req, res) => {
     User.find()
         .then(allUsers => {
             res.json({ users: allUsers })
-            console.log("User res",res)
+            // console.log("User res",res)
         })
         .catch(err => res.json({ message: "Something went wrong", error: err }));
 }

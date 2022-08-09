@@ -12,6 +12,7 @@ const loginContext = React.createContext(
     }// values required to pass to descendents
 );
 
+
 function LoginContextProvider(props) {
     const [users, setUsers] = useState();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -20,8 +21,9 @@ function LoginContextProvider(props) {
     useEffect(() => {
         setIsLoggedIn(users ? true : false);
         // console.log("loginContext22",users)
-    }, [users]);
+    }, [users]); // upon render check state of users and if it exists check if user logged in is true or false
 
+    // pass values through loginContext.Provider
     // {props.children} required to render children in App.js routes
     return (
         <loginContext.Provider
