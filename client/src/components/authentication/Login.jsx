@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
 import { Button, FormControl, FormLabel, Input, InputGroup, InputRightElement, useToast, VStack } from '@chakra-ui/react';
-import { loginContext, LoginContextProvider } from '../LoginContext';
+import { loginContext } from '../LoginContext';
 
 const Login = () => {
 
@@ -64,7 +64,7 @@ const Login = () => {
         // checks for errors, if there are no errors - (!errHandler()), then clear the form and set form has been submitted as True
         if (!errHandler()) {
             console.log("connecting to database and creating user")
-            console.log(formState)
+            // console.log(formState)
             clearForm()
             setHasBeenSubmitted(true)
 

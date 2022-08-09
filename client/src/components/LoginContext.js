@@ -19,10 +19,10 @@ function LoginContextProvider(props) {
 
     useEffect(() => {
         setIsLoggedIn(users ? true : false);
-        console.log("loginContext22",users)
+        // console.log("loginContext22",users)
     }, [users]);
 
-    // {props.children} required to render children
+    // {props.children} required to render children in App.js routes
     return (
         <loginContext.Provider
             value={{
@@ -35,52 +35,5 @@ function LoginContextProvider(props) {
         </loginContext.Provider>
     );
 }
-
-// function TopLevelComponent(props) {
-//     return (
-//         <LoginContextProvider>
-//             <BrowserRouter>
-//                 <Routes>
-//                     <Route path="/login" element={<Login />} />
-//                     <Route path="/users" element={<Dashboard />} />
-//                 </Routes>
-//             </BrowserRouter>
-//         </LoginContextProvider>
-//     );
-// }
-
-// function LoginComponent(props) {
-//     const { setUsers } = useContext(loginContext);
-//     const navigate = useNavigate();
-
-//     /**
-//      * There's other code here for the rest of your login
-//      * but only the submit handler is shown
-//      */
-//     function handleSubmit() {
-//         axios
-//             .post(`/login`, { withCredentials: true })
-//             .then((res) => {
-//                 setUser(res.data);
-//                 navigate('/otherpage');
-//             })
-//             .catch((err) => { });
-//     }
-
-//     return <>jsx elements here</>;
-// }
-
-// function DashboardComponent(props) {
-//     const { isLoggedIn } = useContext(loginContext);
-//     const navigate = useNavigate();
-
-//     useEffect(() => {
-//         if (!isLoggedIn) {
-//             navigate('/login');
-//         }
-//     }, []);
-
-//     return <>jsx elements here</>;
-// }
 
 export { loginContext, LoginContextProvider }

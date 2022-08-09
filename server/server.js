@@ -34,6 +34,7 @@ require("./routes/user.routes")(app);
 
 const server = app.listen(port, () => console.log(`Listening on port: ${port}`));
 
+// initialize library
 const io = require('socket.io')(server, {
     pingTimeout: 6000, // wait 60 secs to see if user sends msg until it closes the connection to save bandwidth
     cors: {
@@ -41,6 +42,7 @@ const io = require('socket.io')(server, {
     },
 });
 
+// first argument of the method is the event name and the second is a callback which gives us an instance of the socket that is connected.
 io.on("connection", (socket) => {
     console.log("connected to socket.io");
 });

@@ -72,7 +72,7 @@ const Register = () => {
         // checks for errors, if there are no errors - (!errHandler()), then clear the form and set form has been submitted as True
         if (!errHandler()) {
             console.log("connecting to database and creating user")
-            console.log(formState)
+            // console.log(formState)
             clearForm()
             setHasBeenSubmitted(true)
 
